@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1381b5cb303708f4e0204c4e958bfd3d",
-    "content-hash": "57ebdb397efe45e8664292ef18ab21d0",
+    "hash": "1394fae7e9b879cb3b1b01f20cfe62ad",
+    "content-hash": "fd7c0f9b2b62c5ab7040c3411b9da3d0",
     "packages": [
         {
             "name": "2amigos/yii2-selectize-widget",
@@ -232,7 +232,7 @@
             "version": "v0.12.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/selectize/selectize.js.git",
+                "url": "git@github.com:selectize/selectize.js.git",
                 "reference": "5870b8a7ce8ecdfca66f54b5ea90d4241126601b"
             },
             "dist": {
@@ -398,6 +398,50 @@
                 "html"
             ],
             "time": "2018-02-23 01:58:20"
+        },
+        {
+            "name": "mhndev/yii2-repository",
+            "version": "1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhndev/yii2-repository.git",
+                "reference": "063c161c423cdb4e14fe6a7d8f6d3fdcebe3bde8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhndev/yii2-repository/zipball/063c161c423cdb4e14fe6a7d8f6d3fdcebe3bde8",
+                "reference": "063c161c423cdb4e14fe6a7d8f6d3fdcebe3bde8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "suggest": {
+                "yiisoft/yii2-mongodb": "needed if you want to use mongodb as your dbms instead of relational dbms"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mhndev\\yii2Repository\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "majid abdolhosseini",
+                    "email": "majid8911303@gmail.com"
+                }
+            ],
+            "description": "repository implementation in Yii2",
+            "keywords": [
+                "design pattern",
+                "repository pattern",
+                "yii2"
+            ],
+            "time": "2017-02-24 13:07:29"
         },
         {
             "name": "paragonie/random_compat",

@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "ramsey/uuid": "^3.7",
         "2amigos/yii2-taggable-behavior": "~1.0",
-        "2amigos/yii2-selectize-widget": "~1.0"
+        "2amigos/yii2-selectize-widget": "~1.0",
+        "mhndev/yii2-repository": "1.*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

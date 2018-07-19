@@ -8,17 +8,19 @@ use app\models\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\repositories\TaskRepository;
 
 /**
  * TaskController implements the CRUD actions for Task model.
  */
-class TaskController extends Controller
-{
+class TaskController extends Controller {
+
+    private $taskRepository;
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -29,18 +31,22 @@ class TaskController extends Controller
         ];
     }
 
+    public function init() {
+        parent::init();
+        $this->taskRepository = new TaskRepository(new \app\models\Task());
+    }
+
     /**
      * Lists all Task models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -50,10 +56,9 @@ class TaskController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -62,18 +67,31 @@ class TaskController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Task();
+//    public function actionCreate() {
+//        $model = new Task();
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            $model->id = (string) \Ramsey\Uuid\Uuid::uuid4();
+//            $model->save();
+//            return $this->redirect(['index']);
+//        }
+//
+//        return $this->render('create', [
+//                    'model' => $model,
+//        ]);
+//    }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {            
-            $model->id = (string)\Ramsey\Uuid\Uuid::uuid4();            
-            $model->save();
+    /**
+     * @return mixed
+     */
+    public function actionCreate() {
+        if (Yii::$app->request->post()) {
+            $this->taskRepository->create(Yii::$app->request->post());
             return $this->redirect(['index']);
         }
-
+        $model = new Task();
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -84,16 +102,33 @@ class TaskController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+//    public function actionUpdate($id) {
+//        $model = $this->findModel($id);
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['index']);
+//        }
+//
+//        return $this->render('update', [
+//                    'model' => $model,
+//        ]);
+//    }
+    
+    
+    
+/**
+ * 
+ * @param type $id
+ * @return type
+ */
+    public function actionUpdate($id) {        
+        if (Yii::$app->request->post()) {       
+        $this->taskRepository->updateOneById($id, Yii::$app->request->post());    
+        return $this->redirect(['index']);
         }
-
+        $model = $this->findModel($id);
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -104,8 +139,7 @@ class TaskController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -118,12 +152,12 @@ class TaskController extends Controller
      * @return Task the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Task::find()->where(['id'=>$id])->one()) !== null) {
+    protected function findModel($id) {
+        if (($model = Task::find()->where(['id' => $id])->one()) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }
