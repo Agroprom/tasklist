@@ -18,20 +18,19 @@ class m180718_105434_init_db extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%task}}', [                                  
-            'id' =>$this->primaryKey(),
-            'uuid' =>$this->string(36)->notNull(),
+        $this->createTable('{{%task}}', [                                           
+            'id' =>$this->string(36)->notNull(),
             'name' => $this->string(56)->notNull(),
             'priority' => $this->smallInteger()->notNull(),    
-            'status' => $this->boolean()
+            'status' => $this->boolean(),
+            'PRIMARY KEY(id)',
             
         ], $tableOptions);
         
-        $this->createTable('{{%tag}}', [            
-            'id' => $this->integer()->unsigned(),
+        $this->createTable('{{%tag}}', [                       
             'id' => $this->primaryKey(),
             'name' => $this->string(56)->notNull()->unique(), 
-            'frequency' => $this->integer(),
+            'frequency' => $this->integer(),            
         ], $tableOptions);
         
         $this->createTable('{{%task_tag}}', [            

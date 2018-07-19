@@ -8,8 +8,7 @@ use dosamigos\taggable\Taggable;
 /**
  * This is the model class for table "task".
  *
- * @property int $id
- * @property string $uuid
+ * @property string $id
  * @property string $name
  * @property int $priority
  * @property int $status
@@ -30,9 +29,8 @@ class Task extends \yii\db\ActiveRecord {
         return [
             [['name', 'priority'], 'required'],
             [['priority', 'status'], 'integer'],
-            [['uuid'], 'string', 'max' => 36],
+            [['id'], 'string', 'max' => 36],
             [['name'], 'string', 'max' => 56],
-            [['uuid'], 'unique'],
             [['tagNames'], 'safe'],
         ];
     }
@@ -43,7 +41,7 @@ class Task extends \yii\db\ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'uuid' => 'Uuid',
+          //  'uuid' => 'Uuid',
             'name' => 'Title',
             'priority' => 'Priority',
             'status' => 'Status',

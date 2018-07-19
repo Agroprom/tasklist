@@ -18,8 +18,8 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'priority', 'status'], 'integer'],
-            [['uuid', 'name'], 'safe'],
+            [['priority', 'status'], 'integer'],
+            [['id', 'name'], 'safe'],
         ];
     }
 
@@ -59,12 +59,12 @@ class TaskSearch extends Task
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'uuid' => $this->uuid,
+            'id' => $this->id,
            // 'status' => $this->status,
             //'priority' => $this->priority,            
         ]);
 
-        $query->andFilterWhere(['like', 'uuid', $this->uuid])
+        $query->andFilterWhere(['like', 'id', $this->id])
             ->andFilterWhere(['like', 'name', $this->name])
             ->orderBy(['status'=>SORT_DESC]);
 

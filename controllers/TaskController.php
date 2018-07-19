@@ -67,7 +67,7 @@ class TaskController extends Controller
         $model = new Task();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {            
-            $model->uuid = (string)\Ramsey\Uuid\Uuid::uuid4();            
+            $model->id = (string)\Ramsey\Uuid\Uuid::uuid4();            
             $model->save();
             return $this->redirect(['index']);
         }
@@ -120,7 +120,7 @@ class TaskController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Task::findOne($id)) !== null) {
+        if (($model = Task::find()->where(['id'=>$id])->one()) !== null) {
             return $model;
         }
 
